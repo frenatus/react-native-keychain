@@ -76,7 +76,7 @@ void rejectWithError(RCTPromiseRejectBlock reject, NSError *error)
   return reject(codeForError(error), messageForError(error), nil);
 }
 
-CFStringRef accessibleValue(NSDictionary *options)
+CFStringRef accessibleValueRNKCM(NSDictionary *options)
 {
   if (options && options[@"accessible"] != nil) {
     NSDictionary *keyMap = @{
@@ -120,7 +120,7 @@ RCT_EXPORT_METHOD(setGenericPasswordForOptions:(NSDictionary *)options withUsern
 
   // Create dictionary of parameters to add
   NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-  dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, accessibleValue(options), kSecAttrAccessible, service, kSecAttrService, passwordData, kSecValueData, username, kSecAttrAccount, nil];
+  dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, accessibleValueRNKCM(options), kSecAttrAccessible, service, kSecAttrService, passwordData, kSecValueData, username, kSecAttrAccount, nil];
 
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
@@ -212,7 +212,7 @@ RCT_EXPORT_METHOD(setInternetCredentialsForServer:(NSString *)server withUsernam
 
   // Create dictionary of parameters to add
   NSData* passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-  dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, accessibleValue(options), kSecAttrAccessible, server, kSecAttrServer, passwordData, kSecValueData, username, kSecAttrAccount, nil];
+  dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, accessibleValueRNKCM(options), kSecAttrAccessible, server, kSecAttrServer, passwordData, kSecValueData, username, kSecAttrAccount, nil];
 
   if (options && options[@"accessGroup"]) {
     [dict setObject:options[@"accessGroup"] forKey:kSecAttrAccessGroup];
